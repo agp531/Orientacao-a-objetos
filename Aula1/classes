@@ -1,0 +1,17 @@
+televisao
+	atributos = polegada,cor,modelo,resolução,marca
+	metodo = ligar,desligar,volume,canal;
+	
+telefone
+	atributos = gb,cor,memoria,tamanho,bateria,marca
+	metodos = ligar,desligar,fazer chamada, mandar msg
+	
+Carro REVENDA
+	Atributo = ano,modelo,marca,Ar condicionado,cambio,combustivel,motor
+
+Carro LAVA CAR
+	Atributo = nomeCliente,placaCarro,modelo,cor;
+
+Carro MONTADORA
+	Atributo = roda,modelo,ano,motor,suspensao,
+	
