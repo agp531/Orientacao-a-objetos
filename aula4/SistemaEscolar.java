@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import javax.sound.midi.Soundbank;
 
 public class SistemaEscolar {
     private Escola e1;
@@ -22,18 +21,25 @@ public class SistemaEscolar {
     public void menu() throws Exception{
         String opcao = "";
         while(!opcao.equals("4")){
-            System.out.println("|--------------------------------|");
+            System.out.println("----------------------------------");
             System.out.println("|[1] Cadastrar nova turma        |");
             System.out.println("|[2] Lista as turmas existentes  |");
             System.out.println("|[3] Consultar turma             |");
             System.out.println("|[4] Sair                        |");
-            System.out.println("|--------------------------------|");
+            System.out.println("----------------------------------");
 
             opcao = this.reader.readLine();
             switch(opcao){
                 case "1":
                     this.cadastrarTurma();
                     break;
+                case "2":
+                    this.listarTurmas();
+                    break;
+                case "3":
+                    this.consultarTurma();
+                    break;
+
 
                 default:
                     break;
@@ -60,7 +66,7 @@ public class SistemaEscolar {
 
         System.out.println("-------Alunos--------");
         for(int i=0;i<40;i++){
-            System.out.println("\nNome do aluno: ");
+            System.out.println("\nNome do aluno: (ENTER para sair)");
             String nome = this.reader.readLine();
             if(nome.equals("")){
                 break;
@@ -87,6 +93,52 @@ public class SistemaEscolar {
             t.setAluno(aluno);
         }
         this.e1.setTurma(t);
+    }
+
+    public void listarTurmas() throws Exception{
+        System.out.println("\n----------------");
+        System.out.println("Relatório de Turmas");
+        for (int i = 0; i < this.e1.getQtdTurmas(); i++){
+            System.out.print("Número: "
+                + this.e1.getTurma(i).getNumeroTurma());
+            System.out.print(" - Curso: "
+                + this.e1.getTurma(i).getNomeCurso());
+            System.out.print(" - Ano: "
+                + this.e1.getTurma(i).getAno()+"\n");
+        }
+    }
+
+    
+    public void consultarTurma(){
+        try{
+            System.out.println("-----------------------");
+            System.out.println("Consulta de Turma");
+            System.out.println("Informe o numero da Turma: ");
+            int numTurma = Integer.parseInt(this.reader.readLine());
+            boolean achou = false;
+
+            for (int i=0; i<this.e1.getQtdTurmas(); i++) {
+                Turma t = this.e1.getTurma(i);
+                if(t.getNumeroTurma() == numTurma){
+                    System.out.println("[Alunos da turma]");
+                    System.out.println("Turma: " + t.getNomeCurso());
+                    int pos = 0;
+                    while(t.getAluno(pos) != null){
+                        String linha = "Nome: "+ t.getAluno(pos).getNome();
+                        linha += " - Matricula: " + t.getAluno(pos).getMatricula();
+                        linha += " - Média: " + t.getAluno(pos).calcularMedia();
+                        System.out.println(linha);
+                        pos++;
+                    }
+                    achou = true;
+                    break;
+                }                
+            }if(!achou){
+                System.out.println("Turma nao encontrada.");
+            }
+        }catch(Exception e1){
+            System.out.println("Formato invalido...");
+        }
     }
 
 }
