@@ -6,10 +6,11 @@ public class LerDados {
         BufferedReader reader = new BufferedReader(
             new InputStreamReader(System.in)); 
             //System.in = teclado
-            //InputStreamReade = captura um fluxo de entrada de dados
+            //InputStreamReader = captura um fluxo de entrada de dados
             //BufferedReader = buffer de leitura
         String linha = "";
         System.out.println("Digite alguma coisa ou S para sair");
+        
         while(!linha.toUpperCase().equals("S")){
             linha = reader.readLine();
             System.out.println("Digitou: "+linha);
